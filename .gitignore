@@ -1,0 +1,42 @@
+# Qt
+
+*.user
+
+moc_*
+
+ui_*
+
+qrc_*
+
+Makefile
+
+
+*.qm
+
+/.qmake.stash
+
+/.qmake.cache
+
+
+# Folders
+
+release/
+
+debug/
+
+
+#Compied Object files, Dynamic libs
+
+*.o
+
+*.dll
+
+
+
+# Executables
+
+*.exe
+
+*.Release
+
+*.Debug
