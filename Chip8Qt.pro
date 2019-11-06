@@ -16,16 +16,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    chip8.cpp \
+    coloroptiondialog.cpp \
+    glwidget.cpp \
+    keymappingdialog.cpp \
+    keysmappingdialog.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    chip8.h \
+    coloroptiondialog.h \
+    glwidget.h \
+    keymappingdialog.h \
+    keysmappingdialog.h \
     mainwindow.h
 
-FORMS += \
-    mainwindow.ui
+LIBS += -lopengl32
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    coloroptiondialog.ui \
+    keymappingdialog.ui \
+    keysmappingdialog.ui

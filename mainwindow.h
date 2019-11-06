@@ -1,17 +1,20 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QApplication>
 #include <QMainWindow>
 #include <QKeyEvent>
-#include <QMenu>
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QColorDialog>
-#include <QColor>
+#include <QDebug>
+#include <QSettings>
+#include "coloroptiondialog.h"
+#include "keysmappingdialog.h"
+#include "glwidget.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+//TODO: Добавить иконку?
+class KeysMappingDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -21,11 +24,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QVector<Qt::Key> &getVecKeys();
 private:
-    Ui::MainWindow *ui;
-
     //OpenGLWidget
-    //KeyMap Widget
+    GLWidget *mainWidget;
+
+    /*Menus & Actions*/
     QMenu *menuFile;
     QMenu *menuTool;
     QAction *actionOpen;
@@ -35,12 +39,33 @@ private:
 
     void createActions();
     void createMenus();
+    /*Keys*/
+    QVector<Qt::Key> vecKeys;
+
+    KeysMappingDialog *keysMapDialog;
+    /*Colors*/
+    QColor backgroundColor;
+    QColor textureColor;
+
+    /*Settings*/
+    QSettings *settings;
+
+    void loadSettings();
+    void saveSettings();
+
     // QWidget interface
 protected:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
-public slots:
+private slots:
     void slotOpenFile();
     void slotColorDialog();
+    void slotKeysMappingDialog();
+
+public slots:
+    void slotGetSignalFromKeyMap(int keyNumber);
+    void slotSetNewKeyValue(int keyNumber, Qt::Key key);
+signals:
+    void signalGetKey(Qt::Key key);
 };
 #endif // MAINWINDOW_H
