@@ -1,5 +1,6 @@
 #include "keymappingdialog.h"
 #include "ui_keymappingdialog.h"
+#include <QDebug>
 
 KeyMappingDialog::KeyMappingDialog(Qt::Key key, QWidget *parent) :
     QDialog(parent),
@@ -8,6 +9,7 @@ KeyMappingDialog::KeyMappingDialog(Qt::Key key, QWidget *parent) :
     ui->setupUi(this);
     ui->label_2->setText(static_cast<QChar>(keyValue));
     this->setWindowTitle("Key Mapping Dialog");
+    qDebug() << "Key = " << keyValue;
 }
 
 KeyMappingDialog::~KeyMappingDialog()
